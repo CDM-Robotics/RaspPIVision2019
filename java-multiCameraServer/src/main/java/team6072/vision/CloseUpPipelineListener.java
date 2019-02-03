@@ -101,7 +101,7 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
                 ArrayList<RotatedRect> rectangles = new ArrayList<RotatedRect>();
                 // Network Tables Stuff
                 mTbl.getEntry("PIKey").setString("Call: " + mCounter);
-                if (mats.size() == 2) {
+                if (mats.size() != 0) {
                     for (int i = 0; i < 2; i++) {
                         RotatedRect rect = Imgproc.minAreaRect(new MatOfPoint2f(mats.get(i).toArray()));
 
@@ -133,12 +133,6 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
                     
                     mTbl.getEntry("halfOfCameraPixelWidthInches").setDouble(halfOfCameraPixelWidthInches);
                     mTbl.getEntry("Distance From Target X").setDouble(distanceFromTargetX);
-                    /*
-                    double tapeDistFromCenterPx = abs(rectangles.get(0).center.x - massCenterXpx);
-                    double halfOfCameraPixelHeightInches = (TAPE_DIST_FROM_CENTER_INCHES_X / tapeDistFromCenterPx) * HALF_OF_CAMERA_PIXEL_WIDTH_PIXELS;
-                    double distanceFromTarget = halfOfCameraPixelWidthInches / (java.lang.Math.tan(HALF_OF_CAMERA_FOV_ANGLE_X));
-                    
-                    mTbl.getEntry("Distance From Target X").setDouble(distanceFromTarget);*/
                 }
 
                 mCounter++;

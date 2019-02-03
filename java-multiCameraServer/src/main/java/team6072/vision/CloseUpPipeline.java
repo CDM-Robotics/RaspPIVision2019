@@ -50,9 +50,9 @@ public class CloseUpPipeline implements VisionPipeline {
 
 		// Step HSV_Threshold0:
 		Mat hsvThresholdInput = cvResizeOutput;
-		double[] hsvThresholdHue = {79.8561153651999, 99.7916626930237};
-		double[] hsvThresholdSaturation = {122.30215317053761, 219.58333333333334};
-		double[] hsvThresholdValue = {139.11867296095375, 255.0};
+		double[] hsvThresholdHue = {76.61870297768132, 98.75000000000001};
+		double[] hsvThresholdSaturation = {158.99283236308062, 218.10762763023376};
+		double[] hsvThresholdValue = {184.82913377473685, 255.0};
 		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
 		// Step Find_Contours0:
