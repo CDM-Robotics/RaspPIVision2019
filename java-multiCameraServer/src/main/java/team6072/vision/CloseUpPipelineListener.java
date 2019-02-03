@@ -37,7 +37,7 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
     private NetworkTableEntry mY2;
 
     private final double TAPE_DIST_FROM_CENTER_INCHES_X = 5.65572;
-    private final double HALF_OF_CAMERA_FOV_ANGLE_X = .433304;
+    private final double HALF_OF_CAMERA_FOV_ANGLE_X = 0.4549246;
     private final int HALF_OF_CAMERA_PIXEL_WIDTH_PIXELS = 80;    
 
     // Pipelines
@@ -71,8 +71,8 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
     }
 
     public void outputColorFilters() {
-        Mat thresholdOutput = mPipeline.hsvThresholdOutput();
-        mHVSThresholdOutput.putFrame(thresholdOutput);
+        Mat erodeOutput = mPipeline.cvErodeOutput();
+        mHVSThresholdOutput.putFrame(erodeOutput);
     }
 
     public void outputRectangles(Mat mat) {
@@ -101,7 +101,7 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
                 ArrayList<RotatedRect> rectangles = new ArrayList<RotatedRect>();
                 // Network Tables Stuff
                 mTbl.getEntry("PIKey").setString("Call: " + mCounter);
-                if (mats.size() != 0) {
+                if (mats.size() == 2) {
                     for (int i = 0; i < 2; i++) {
                         RotatedRect rect = Imgproc.minAreaRect(new MatOfPoint2f(mats.get(i).toArray()));
 
@@ -133,6 +133,11 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
                     
                     mTbl.getEntry("halfOfCameraPixelWidthInches").setDouble(halfOfCameraPixelWidthInches);
                     mTbl.getEntry("Distance From Target X").setDouble(distanceFromTargetX);
+                    // calculate the average position without weight
+                    double averagePosition = (rectangles.get(0).center.x + rectangles.get(1).center.x) / 2;
+                    mTbl.getEntry("Average Position pixels").setDouble(averagePosition);
+                    
+
                 }
 
                 mCounter++;
