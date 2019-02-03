@@ -126,7 +126,7 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
 
                     mTbl.getEntry("Center Of Mass X").setDouble(massCenterXpx);
                     mTbl.getEntry("Center Of Mass Y").setDouble(massCenterYpx);
-                    //Calculate the distance from the target
+                    //Calculate the distance from the target X horizontally
                     double tapeDistFromCenterPxX = abs(rectangles.get(0).center.x - massCenterXpx);
                     double halfOfCameraPixelWidthInches = (TAPE_DIST_FROM_CENTER_INCHES_X / tapeDistFromCenterPxX) * HALF_OF_CAMERA_PIXEL_WIDTH_PIXELS;
                     double distanceFromTargetX = halfOfCameraPixelWidthInches / (java.lang.Math.tan(HALF_OF_CAMERA_FOV_ANGLE_X));
