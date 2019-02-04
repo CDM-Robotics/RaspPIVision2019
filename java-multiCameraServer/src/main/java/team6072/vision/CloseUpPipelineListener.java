@@ -37,7 +37,7 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
     private NetworkTableEntry mY2;
 
     private final double TAPE_DIST_FROM_CENTER_INCHES_X = 5.65572;
-    private final double HALF_OF_CAMERA_FOV_ANGLE_X = 0.4549246;
+    private final double HALF_OF_CAMERA_FOV_ANGLE_X = 0.9098492;
     private final int HALF_OF_CAMERA_PIXEL_WIDTH_PIXELS = 80;    
 
     // Pipelines
@@ -129,7 +129,7 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
                     //Calculate the distance from the target X horizontally
                     double tapeDistFromCenterPxX = abs(rectangles.get(0).center.x - massCenterXpx);
                     double halfOfCameraPixelWidthInches = (TAPE_DIST_FROM_CENTER_INCHES_X / tapeDistFromCenterPxX) * HALF_OF_CAMERA_PIXEL_WIDTH_PIXELS;
-                    double distanceFromTargetX = halfOfCameraPixelWidthInches / (java.lang.Math.tan(HALF_OF_CAMERA_FOV_ANGLE_X));
+                    double distanceFromTargetX = halfOfCameraPixelWidthInches / (java.lang.Math.tan( HALF_OF_CAMERA_FOV_ANGLE_X / 2 ));
                     
                     mTbl.getEntry("halfOfCameraPixelWidthInches").setDouble(halfOfCameraPixelWidthInches);
                     mTbl.getEntry("Distance From Target X").setDouble(distanceFromTargetX);
