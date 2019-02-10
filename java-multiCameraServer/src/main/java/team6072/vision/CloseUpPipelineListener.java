@@ -169,7 +169,7 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
 
     /**
      * This function finds the distance between the camera and the target, 
-     *  - assuming that the target is perfectly perpendicular to the target
+     *  - assuming that the target is perfectly perpendicular to the target horizantally
      *  - uses the horizantal axis ONLY, meaning it does not take into account vertical distortion
      * 
      * @param rotatedRects - the Array list of ordered Rotated Rectanlges
@@ -186,9 +186,6 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
         double massCenterYpx = centerOfMass(mass1, mass2, rotatedRects.get(0).center.y, rotatedRects.get(1).center.y);
         
         // Calculate the distance from the target X horizontally
-        // using the horizantal numbers
-        // assuming it is perpendicular to the wall
-
         double tapeDistFromCenterPxX = abs(rotatedRects.get(0).center.x - massCenterXpx);
         double halfOfCameraPixelWidthInches = (TAPE_DIST_FROM_CENTER_INCHES_X / tapeDistFromCenterPxX)
                 * (CAMERA_PIXEL_WIDTH_PIXELS / 2);
@@ -217,7 +214,7 @@ public class CloseUpPipelineListener implements VisionRunner.Listener<CloseUpPip
     /**
      * Calculates the distance from target X horizantally
      * - using the vertical Axis
-     * - assuming it is perpendicular to the wall
+     * - assuming it is perpendicular to the wall vertically
      * @param rotatedRects
      * @return
      */
